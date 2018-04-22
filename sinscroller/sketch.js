@@ -12,7 +12,7 @@ function windowResized() {
 }
 
 function keyTyped() {
-    circles.push(new SinScrollerCircle(0, windowHeight / 2, 5, 150, 2));
+    circles.push(new SinScrollerCircle(0, windowHeight / 2, 3, 250, 2));
     return false;    
 }
 
@@ -31,7 +31,9 @@ function draw() {
             circles.splice(i, 1);
         }
         else {
-            circles[i].draw(color(255, 255, 255, circles[i].x % 255), 40); // Color, radius
+            let c = circles[i];
+            let alpha = map(abs(c.position.y - c.originalY), 0, c.amplitude, 0.35, 1);
+            c.draw('rgba(255, 255, 255,' + alpha + ')', 40); // Color, radius
         }        
     }
 }
